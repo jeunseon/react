@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name='Author-Date' content='2022.08.23'>
+    <title>React 설치 및 컴포넌트 생성과 사용</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- React 웹개발 오픈소스 -->
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</head>
+<body>
+    <!-- 1. html DOM container -->
+    <div id="root"></div>
+    <div id="root1"></div>
+    <div id="foot"></div>
+
+    <!-- 2. React 컴포넌트 생성하기 -->
+    <script type="text/babel">
+        // class형 Component
+        class WrapComponent extends React.Component{
+            render(){
+                return( // class형의 경우 return이 들어와야 한다.
+                    // 감싸는 태그는 하나여야 한다. 둘 이상 쓰려면 감싸는 태그가 있어야 한다.
+                    <div id="wrap" style={{width:'100%', height:'100vh', display:'flex', background:'#f7f7f7'}}>
+                        <h2 style={{margin:'auto', fontSize:'70px', color:'#39c'}}>{this.props.title}</h2>
+                        <h3 style={{margin:'auto', fontSize:'50px', color:'#000'}}>{this.props.sub}</h3>
+                    </div>
+                );
+            }
+        }
+
+        class SectionComponent extends React.Component{
+            static defaultProps = {
+                title:'SECTION Component',
+                sub:'Component',
+                kor:100,
+                eng:99,
+                mat:100
+            }
+            render(){
+                let {title, sub, kor, eng, mat} = this.props;
+                return(
+                    <section id="section" style={{width:'100%', height:'100vh', display:'flex', background:'#f7f7f7'}}>
+                        <h2 style={{margin:'auto', fontSize:'70px', color:'#39c'}}>{title}</h2>
+                        <h3 style={{margin:'auto', fontSize:'50px', color:'#000'}}>{sub}</h3>
+                        <h3 style={{margin:'auto', fontSize:'50px', color:'#000'}}>{kor}</h3>
+                        <h3 style={{margin:'auto', fontSize:'50px', color:'#000'}}>{eng}</h3>
+                        <h3 style={{margin:'auto', fontSize:'50px', color:'#000'}}>{mat}</h3>
+                    </section>
+                );
+            }
+        }
+
+        class FooterComponent extends React.Component{
+            render(){
+                let {title, sub, tel, email} = this.props;
+                return(
+                    <footer id="footer" style={footerStyle}>
+                        <h2 style={footStyle1}>{title}</h2>
+                        <h3 style={footStyle2}>{sub}</h3>
+                        <h3 style={footStyle2}>{tel}</h3>
+                        <h3 style={footStyle2}>{email}</h3>
+                    </footer>
+                );
+            }
+        }
+        FooterComponent.defaultProps = {
+            title:'FootComponent',
+            sub:'props',
+            tel:'010-1111-2222',
+            email:'euns420@naver.com'
+        }
+        const footerStyle = {
+            width:'100%',
+            height:'100vh',
+            display:'flex',
+            flexFlow:'row wrap',
+            background:'#f7f7f7'
+        }
+        const footStyle1 = {
+            margin:'auto',
+            fontSize:'70px',
+            color:'#c39'
+        }
+        const footStyle2 = {
+            margin:'auto',
+            fontSize:'50px',
+            color:'#000'
+        }
+
+        // 3. ReactDOM : ReactDOM container와 React 컴포넌트 연결하기
+        ReactDOM.render(
+            <WrapComponent title='React 설치하기' sub='Component 만들기' />, 
+            document.getElementById('root')
+        );
+        
+        ReactDOM.render(
+            <SectionComponent />, 
+            document.getElementById('root1')
+        );
+
+        ReactDOM.render(
+            <FooterComponent />, 
+            document.getElementById('foot')
+        );
+
+    </script> 
+</body>
+</html>

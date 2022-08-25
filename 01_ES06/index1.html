@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name='Author-Date' content='2022.08.23'>
+    <title>Document Object Model(DOM) & javascript(순수자바스크립트==바닐라스크립트)</title>
+    <!-- 
+        1.react.js:웹에서 부분 또는 전부를 리액트로 제작사용. 웹배포(깃허브, 닷홈 웹호스팅) - 웹포트폴리오
+        2.create-react-app:CRA. 포로젝트 단위 제작 - JSX, node.js, node-sass, router, redux
+            -깃허브에서 배포 - typeScript
+        3.vue.js 
+    -->
+    <style>
+        table{width: 800px; margin: 10px auto; border-collapse: collapse;}
+        table th{font-size: 17px;}
+        table td{font-size: 16px; text-align: center;}
+        table th, td{border: 1px solid #ccc; height: 40px;}
+        table th{height: 50px; background: rgb(252, 171, 79);}
+    </style>
+</head>
+<body>
+    <h2 style="text-align: center; font-size: 30px;">화살표 함수와 리턴문</h2>
+    <hr>
+    <div id="output"></div>
+    <br>
+    <hr>
+    <h2 style="text-align: center; font-size: 30px;">버튼등록 이벤트</h2>
+    <hr>
+    <div style="text-align: center; ">
+        <button id="btn1" onclick="food()">버튼1</button>
+        <button id="btn2">버튼2</button>
+        <button id="btn3">버튼3</button>
+        <a href="#" id="btn4">버튼4</a>
+        <a href="javascript:void(0)" id="btn5">버튼5</a>
+        <a href="javascript:" id="btn6">버튼6</a>
+    </div>
+    <br>
+    <hr>
+
+    <script type="module">
+        // 리턴문 & 화살표 함수()
+        fn1(1); // 호이스팅
+        function fn1(pa){
+            console.log('선언적 함수' + pa);
+        }
+        fn1(2);
+
+        // fn2(3); 익명 함수는 호이스팅이 일어나지 않음
+        let fn2 = function(pa){
+            console.log('익명 함수' + pa);
+        }
+        fn2(4); // 익명 함수는 항상 변수()이름 아래에서만 실행가능
+
+        // ES는 2015년을 기점으로 ES6 ES NEXT.js로 바뀜
+        let fn3 = (z, y) => { //매개변수가 하나일때는 () 생략 가능. z =>{}로 쓸 수 있다
+            console.log('화살표 함수는 익명함수다. function만 괄호()' + z+y);
+        }
+        fn3(1, 2);
+
+        // 두 수의 연산을 return받아서 출력하는 DOM 탬플릿 구현
+        let fn4 = (a, b) => {
+            return(
+                `<h1>더하기 ${a+b}</h1>
+                <h1>뺴기 ${a-b}</h1>
+                <h1>곱하기 ${a*b}</h1>
+                <h1>나누기 ${a/b}</h1>
+                <h1>나눈 나머지 ${a%b}</h1>`
+            );
+        }
+        // fn4(6,7);
+        document.getElementById('output').innerHTML = fn4(2,3);
+        document.getElementById('output').style.fontSize = '20px';
+        document.getElementById('output').style.textAlign = 'center';
+        document.getElementById('output').style.color = '#39c';
+
+        // 버튼등록 == 이벤트 리스너
+        // 버튼1 클릭하면 호출되는 함수
+        const food = () => {
+            alert('Btn1 클릭 이벤트 확인');
+        }
+
+        // 버튼2 클릭하면 이벤트 리스너 등록
+        const btn2 = document.getElementById('btn2');
+        btn2.onclick = () => {
+            alert('Btn2 클릭 이벤트 확인');
+        }
+
+        // 버튼3 클릭하면 이벤트 리스너 등록
+        const btn3 = document.getElementById('btn3');
+        btn3.addEventListener('click', ()=>{
+            alert('Btn3 클릭 이벤트 확인');
+        });
+
+        // 자바스크립트의 이벤트 등록 가장 많이 권장
+        const btn4 = document.getElementById('btn4');
+        btn4.addEventListener('click', e=>{
+            e.preventDefault(); //클릭하려는 것의 기본값(a href='#') 차단
+            alert('Btn4 클릭 이벤트 확인');
+        })
+
+        // a태그의 href="javascript:void(0)"
+        const btn5 = document.getElementById('btn5');
+        btn5.addEventListener('click', ()=>{
+            alert('Btn5 클릭 이벤트 확인');
+        });
+
+        // a태그의 href="javascript:"
+        const btn6 = document.getElementById('btn6');
+        btn6.addEventListener('click', ()=>{
+            alert('Btn6 클릭 이벤트 확인');
+        });
+
+        // 모듈사용
+        // 가져오기 file01.js
+        // 임포트 import
+        // 구문 : import 변수명 from './file01.js';
+        // import abc from './file01.js';
+        /* import {mo} from './file01.js';
+        console.log('외부파일 가져오기 결과'+ mo()); */
+
+        // 클래스
+        // 객체 == 발전 형태
+        const obj = {
+            init:function(){
+                this.header();
+                this.main();
+                this.footer();
+            },
+            header:function(){
+                
+            },
+            main:function(){
+
+            },
+            footer:function(){
+
+            }
+        }
+        obj.init();
+
+        const obj1 = {
+            init(){
+                this.header();
+                this.main();
+                this.footer();
+            },
+            header:function(){
+                
+            },
+            main:function(){
+
+            },
+            footer:function(){
+
+            }
+        }
+        obj1.init();
+
+        class obj2{
+            init(){
+                this.section1();
+                this.section2();
+            }
+            section1(){
+
+            } //function이 없어서 ,를 안쓴다.
+            section2(){
+
+            }
+        }
+        const newObj2 = new obj2(); //새로운 객체를 만듬
+        newObj2.init();
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name='Author-Date' content='2022.08.22'>
+    <title>Document Object Model(DOM) & javascript(순수자바스크립트==바닐라스크립트)</title>
+    <!-- 
+        1.react.js:웹에서 부분 또는 전부를 리액트로 제작사용. 웹배포(깃허브, 닷홈 웹호스팅) - 웹포트폴리오
+        2.create-react-app:CRA. 포로젝트 단위 제작 - JSX, node.js, node-sass, router, redux
+            -깃허브에서 배포 - typeScript
+        3.vue.js 
+    -->
+    <style>
+        table{width: 800px; margin: 10px auto; border-collapse: collapse;}
+        table th{font-size: 17px;}
+        table td{font-size: 16px; text-align: center;}
+        table th, td{border: 1px solid #ccc; height: 40px;}
+        table th{height: 50px; background: rgb(252, 171, 79);}
+    </style>
+</head>
+<body>
+    <div id="root">
+        <h1 class="tit1"></h1>
+        <h1 class="tit1"></h1>
+        <h2 class="tit2"></h2>
+        <h2 id="tit1"></h2>
+        <h2 id="tit2"></h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                    <th>국어</th>
+                    <th>영어</th>
+                    <th>수학</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+
+            </tbody>
+        </table>
+        <br>
+        <hr>
+        <table>
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                    <th>전화</th>
+                    <th>이메일</th>
+                </tr>
+            </thead>
+            <tbody id="tbody2">
+
+            </tbody>
+        </table>
+        <br>
+        <hr>
+        <table>
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                    <th>전화</th>
+                    <th>이메일</th>
+                    <th>국어</th>
+                    <th>영어</th>
+                    <th>수학</th>
+                    <th>총점</th>
+                    <th>평균</th>
+                </tr>
+            </thead>
+            <tbody id="tbody3">
+
+            </tbody>
+        </table>
+        <br>
+        <hr>
+        <table>
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                    <th>전화</th>
+                    <th>이메일</th>
+                    <th>국어</th>
+                    <th>영어</th>
+                    <th>수학</th>
+                    <th>총점</th>
+                    <th>평균</th>
+                </tr>
+            </thead>
+            <tbody id="tbody4">
+
+            </tbody>
+        </table>
+        <br>
+
+    </div>
+
+    <script>
+        // 변수
+        // ES5
+        // 가변변수 (var) : 재선언 가능, 재사용 가능, 값이 바뀌는 변수
+
+        // ES6
+        // 가변변수 (let) : 재선언 불가, 재사용 가능, 값이 바뀌는 변수
+        // 불변변수 (const) : 재선언 불가, 재사용 불가능 - 즉 변수의 값은 한번 정하면 바뀌지 않는다(상수)
+
+        var a=5;
+        var b=6;
+        var c=a+b;
+        // console.log('a+b='+c);
+
+        //재선언
+        var a=10;
+        var b=7;
+        var c=a*b;
+        //console.log('a*b='+c); 
+        
+        //재사용
+        a=20;
+        b=67;
+        c=a*b;
+        // console.log('a*b='+c); 
+
+        // let 키워드는 : 변수(식별자) 재선언 불가능
+        /* let a=100;
+        let b=200;
+        let c=a*b;
+        console.log('a*b='+c); */
+
+        let txt='더휴먼';
+        console.log(txt);
+        // 재사용 불가
+        /* txt='더휴먼아카데미';
+        console.log(txt); */
+        
+        // 템플릿 숫자 문자 문자열 특수문자 사용
+        // 문자열 연결 연산자
+        let year = 2022;
+        const tit = '리액트' + year + '년도';
+        let y = 2022;
+        let m = 8;
+        let d = 22;
+        console.log(tit);
+        //템프럴 리터럴(``)
+        const title = `리액트 ${y}년 ${m}월 ${d}일`;
+        console.log(title);
+
+        //Document Object Model(DOM)
+        //태그(Object) 요소(element) 선택자
+        //아이디
+        //선택
+
+        //쿼리셀렉터
+        //웹문서 최상위 선택자.속성 = 속성값(내용)
+        //17,18,19,20 line
+        document.querySelector('.tit1').innerHTML=`${title} 돔요소에 템플릿 내용 추가 출력`;
+        document.querySelector('.tit1').style.fontSize = '20px';
+        document.querySelector('.tit1').style.color = '#c77';
+        document.querySelector('.tit1').style.textAlign = 'center';
+        document.querySelector('.tit1').style.margin = '100px 0 50px 0';
+
+        document.querySelector('.tit2').innerHTML = '자바스크립트 스타일 문자 타이틀';
+        const h2Style = `font-size:25px; color:#f00; text-align : center; margin:30px 0 0 0;`;
+        document.querySelector('.tit2').style=h2Style;
+
+        //아이디
+        document.getElementById('tit1').innerHTML = 'DOM 선택자 #tit1 getElementById()';
+        document.getElementById('tit1').style.textAlign = 'center';
+        document.getElementById('tit1').style.fontSize = '50px';
+        
+        document.getElementById('tit2').innerHTML = 'DOM 선택자 #tit2 getElementById()';
+        document.getElementById('tit2').style.textAlign = 'center';
+        document.getElementById('tit2').style.fontSize = '50px';
+
+        //클래스명이 중복될 때 배열 사용 [0][1]
+        document.getElementsByClassName('tit1')[0].innerHTML = 'Dom 선택자 getElementByClassName';
+        document.getElementsByClassName('tit1')[1].innerHTML=`${title} 돔요소에 템플릿 내용 추가 출력`;
+        document.getElementsByClassName('tit1')[1].style=h2Style;
+
+        // 삼항조건 연산자
+        let jumsoo = 90;
+        let e = jumsoo>= 80 ? '합격' :'불합격';
+        const tit2 = document.querySelector('.tit2');
+        tit2.innerHTML = e;
+
+        //객체 지정과 배열 반복문
+        const sungjuk = [
+            {번호:1, 이름:'오정현', 국어:100, 영어:99, 수학:98},
+            {번호:2, 이름:'신홍윤', 국어:98, 영어:99, 수학:89},
+            {번호:3, 이름:'김은진', 국어:50, 영어:100, 수학:98},
+            {번호:4, 이름:'박혜리', 국어:68, 영어:89, 수학:99},
+            {번호:5, 이름:'박채영', 국어:99, 영어:80, 수학:87},
+            {번호:6, 이름:'정은선', 국어:79, 영어:100, 수학:100}
+        ];
+        // console.log(sungjuk);
+        /* for(let i=0; i<6; i++){
+            console.log(sungjuk[i].번호, sungjuk[i].이름, sungjuk[i].국어, sungjuk[i].영어, sungjuk[i].수학);
+        } */
+        let output = ''; //출력할 내용 보관 변수
+        const tbody = document.getElementById('tbody');
+        /* for(let i=0; i<6; i++){
+            output += `<tr>`;
+            output += `<td>${sungjuk[i].번호}</td>`;
+            output += `<td>${sungjuk[i].이름}</td>`;
+            output += `<td>${sungjuk[i].국어}</td>`;
+            output += `<td>${sungjuk[i].영어}</td>`;
+            output += `<td>${sungjuk[i].수학}</td>`;
+            output += `</tr>`;
+        }; */
+
+        /* sungjuk.forEach(function(item, index){
+            output += `<tr>`;
+            output += `<td>${item.번호}</td>`;
+            output += `<td>${item.이름}</td>`;
+            output += `<td>${item.국어}</td>`;
+            output += `<td>${item.영어}</td>`;
+            output += `<td>${item.수학}</td>`;
+            output += `</tr>`;
+        }); */
+
+        sungjuk.map(function(value, index, array){
+            output += `<tr key=${value.번호}>`; //key 번호를 적어줘야된다.
+            output += `<td>${value.번호}</td>`;
+            output += `<td>${value.이름}</td>`;
+            output += `<td>${value.국어}</td>`;
+            output += `<td>${value.영어}</td>`;
+            output += `<td>${value.수학}</td>`;
+            output += `</tr>`;
+        });
+
+        tbody.innerHTML = output; 
+        
+        const phone = [
+            {번호:1, 이름:'오정현', 전화 : '010-1111-2222', 이메일 : 'euns420@naver.com'},
+            {번호:2, 이름:'신홍윤', 전화 : '010-1111-3333', 이메일 : 'dbfldfkthsu@naver.com'},
+            {번호:3, 이름:'김은진', 전화 : '010-1111-4444', 이메일 : 'euns4201@naver.com'},
+            {번호:4, 이름:'박혜리', 전화 : '010-1111-5555', 이메일 : 'euns4202@naver.com'},
+            {번호:5, 이름:'박채영', 전화 : '010-1111-6666', 이메일 : 'euns4203@naver.com'},
+            {번호:6, 이름:'정은선', 전화 : '010-1111-7777', 이메일 : 'euns4204@naver.com'}
+        ];
+
+        let output2='';
+        const tbody2 = document.getElementById('tbody2');
+        
+        /* for(k=0; k<6; k++){
+            output2 += `<tr>`; //key 번호를 적어줘야된다.
+            output2 += `<td>${phone[k].번호}</td>`;
+            output2 += `<td>${phone[k].이름}</td>`;
+            output2 += `<td>${phone[k].전화}</td>`;
+            output2 += `<td>${phone[k].이메일}</td>`;
+            output2 += `</tr>`;
+        } */
+
+        /* phone.forEach(function(item, index){
+            output2 += `<tr>`; //key 번호를 적어줘야된다.
+            output2 += `<td>${item.번호}</td>`;
+            output2 += `<td>${item.이름}</td>`;
+            output2 += `<td>${item.전화}</td>`;
+            output2 += `<td>${item.이메일}</td>`;
+            output2 += `</tr>`;
+        }); */
+        
+        phone.map(function(value, index, array){
+            output2 += `<tr>`; //key 번호를 적어줘야된다.
+            output2 += `<td>${value.번호}</td>`;
+            output2 += `<td>${value.이름}</td>`;
+            output2 += `<td>${value.전화}</td>`;
+            output2 += `<td>${value.이메일}</td>`;
+            output2 += `</tr>`;
+        });
+
+        tbody2.innerHTML = output2;
+
+        // 반복문
+        // ES6 map();
+        /* phone.map(function(value, index, array){
+            console.log(value, index, array);
+        }); */
+
+        // 배열 병합
+        const arr1 = ['1학년', '2학년'];
+        const arr2 = ['3학년', '4학년'];
+
+        // ES5 버전 병합(merge) : concat()
+        // const arr3 = arr1.concar(arr2);
+        const arr3 = [].concat(arr1, arr2);
+        console.log('arr1[]'+ arr1);
+        console.log('arr2[]'+ arr2);
+        console.log('arr3[]'+ arr3);
+        
+        // ES6 버전 병합(merge) : 전개연산자 ...
+        const a1=['1학년', '2학년'];
+        const a2=['3학년', '4학년'];
+        const a3=[...a1, ...a2];
+        console.log('[...a3]' , [...a3]);
+        console.log('[...a1]', [...a1]);
+        console.log('[...a2]', [...a2]);
+        console.log('[...a1, ...a2]', [...a1, ...a2]);
+    
+        // 객체가 있는 배열 전개 연산자
+        //sungjuk 객체와 phone 객체 병합
+        const obj = [...sungjuk, ...phone];
+        console.log(obj);
+
+        // sungjuk 번호, 이름, 국어, 영어, 수학
+        // phone 번호, 이름, 전화, 이메일
+        // merge 응용
+        // grade 번호, 이름, 전화, 이메일, 국어, 영어, 수학, 총점, 평균
+        // sungjuk.map();
+        // sungjuk.map(function(vaule, index, array){});
+
+        sungjuk.map(function(item, index, array){
+            console.log('phone[index]', phone[index].번호, phone[index].이름, phone[index].전화, item.국어, item.영어, item.수학);
+        });
+
+        for(let i=0; i<6; i++){
+            console.log(`phone[${i}]`, phone[i].번호, phone[i].이름, phone[i].전화, sungjuk[i].국어, sungjuk[i].영어, sungjuk[i].수학);
+        }
+
+        // 배열 데이터에 병합
+        let grade = [];
+        for(let i=0; i<6; i++){
+            grade[i] = {번호: phone[i].번호, 이름: phone[i].이름, 전화: phone[i].전화, 이메일: phone[i].이메일, 국어: sungjuk[i].국어, 영어: sungjuk[i].영어, 수학: sungjuk[i].수학, 총점: sungjuk[i].국어+ sungjuk[i].영어+ sungjuk[i].수학, 평균: Math.round((sungjuk[i].국어+ sungjuk[i].영어+ sungjuk[i].수학)/3)}
+        }
+        // console.log(grade);
+
+        txt='';
+        for(let i=0; i<grade.length; i++){
+            txt += `<tr>`
+            txt += `<td>${grade[i].번호}</td>`
+            txt += `<td>${grade[i].이름}</td>`
+            txt += `<td>${grade[i].전화}</td>`
+            txt += `<td>${grade[i].이메일}</td>`
+            txt += `<td>${grade[i].국어}</td>`
+            txt += `<td>${grade[i].영어}</td>`
+            txt += `<td>${grade[i].수학}</td>`
+            txt += `<td>${grade[i].총점}</td>`
+            txt += `<td>${grade[i].평균}</td>`
+            txt += `</tr>`
+        }
+        document.getElementById('tbody3').innerHTML = txt;
+
+        // 구조분할 할당
+        let grade1 = [];
+        for(let i=0; i<6; i++){
+            let{번호, 이름, 전화, 이메일} = phone[i];
+            let{국어, 영어, 수학} = sungjuk[i];
+            grade1[i] = {번호: 번호, 이름:이름, 전화:전화, 이메일: 이메일, 국어:국어, 영어:영어, 수학:수학, 총점: 국어+영어+ 수학, 평균: Math.round((국어+ 영어+ 수학)/3)}
+        }
+        let txt1='';
+        for(let i=0; i<grade1.length; i++){
+            let{번호, 이름, 전화, 이메일, 국어, 영어, 수학, 총점, 평균} = grade1[i];
+            txt1 += `<tr>`
+            txt1 += `<td>${번호}</td>`
+            txt1 += `<td>${이름}</td>`
+            txt1 += `<td>${전화}</td>`
+            txt1 += `<td>${이메일}</td>`
+            txt1 += `<td>${국어}</td>`
+            txt1 += `<td>${영어}</td>`
+            txt1 += `<td>${수학}</td>`
+            txt1 += `<td>${총점}</td>`
+            txt1 += `<td>${평균}</td>`
+            txt1 += `</tr>`
+        }
+        document.getElementById('tbody4').innerHTML = txt1;
+    </script>
+</body>
+</html>
